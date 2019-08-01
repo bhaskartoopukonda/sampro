@@ -1,0 +1,56 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+       nodejs: $runtimeVersion
+  build:
+    commands:
+      - echo Build started on `date`
+      - pip install --upgrade pip
+      - pip install pipenv --user
+      # linting and unit tests
+      - npm run-script lint
+      - npm test
+      # deploy integration testing environment
+      - serverless deploy --stage test -v
+      
+      # integration tests
+      - npm run-script integration
+      # create directory for deployment packages
+      - mkdir artifacts
+      # create staging deployment package
+      - mkdir artifacts/stg
+      #- serverless package --package artifacts/stg --stage stg -v
+      - sam package --template-file $samTemplateName --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplateName
+      # create prod deployment package
+      - mkdir artifacts/prod
+      #- serverless package --package artifacts/prod --stage prod -v
+      - sam package --template-file $samTemplateName --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplateName
+
+artifacts:
+  files:
+    - artifacts/**/*
+    - serverless.yml
+    - deploy.sh
+
+#version: 0.2
+#phases:
+  #install:
+    #runtime-versions:
+       #nodejs: $runtimeVersion
+  #build:
+    #commands:
+      #- echo Build started on `date`
+      #- pip install --upgrade pip
+      #- pip install pipenv --user
+      #- pip install awscli aws-sam-cli
+ #     - sam package --template-file template.yaml --s3-bucket s3ArtifactBucketName --output-template-file packaged.yaml
+      #- sam package --template-file $samTemplateName --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplateName
+  #post_build:
+    #commands:
+      #- echo Build completed on `date`
+#artifacts:
+  #type: zip
+  #files:
+    #- '**/*'
+  #discard-paths: yes
