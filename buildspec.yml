@@ -28,7 +28,7 @@ phases:
 #      - REGION=us-east-1
 #      - STAGE=prod
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --output-template-file $deplenv-$packagedTemplate --s3-bucket $s3ArtifactBucketName
+      - sam package --template-file $samTemplate --output-template-file $packagedTemplate --s3-bucket $s3ArtifactBucketName
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
 artifacts:
   type: zip
