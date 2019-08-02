@@ -11,7 +11,9 @@ phases:
       - pip install awscli aws-sam-cli
       #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} staging-${packagedTemplate} dev-${packagedTemplate}
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} 
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file DEV-${packagedTemplate} 
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file STG-${packagedTemplate} 
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
      
   post_build:
@@ -31,8 +33,8 @@ artifacts:
   files:
     - $samTemplate
     - ${deplenv}-$packagedTemplate
-    - dev-$packagedTemplate
-    - staging-$packagedTemplate
+    - DEV-$packagedTemplate
+    - STG-$packagedTemplate
     #- deploy.sh 
   discard-paths: yes  
 #version: 0.2
