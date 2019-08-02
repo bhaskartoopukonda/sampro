@@ -14,7 +14,7 @@ phases:
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate 
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
 artifacts:
-  type: zip
+  #type: zip
   files:
     - $samTemplate
     - $packagedTemplate
