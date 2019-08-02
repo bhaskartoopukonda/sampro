@@ -17,7 +17,7 @@ phases:
   post_build:
     commands:
       - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
-      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --capabilities CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND --region us-east-1
+      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --region us-east-1
     #--parameter-override Stage=${deplenv} 
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
 artifacts:
