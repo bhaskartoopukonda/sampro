@@ -21,10 +21,5 @@ REGION="us-east-1"
 #    --s3-prefix sam/${SERVICE}
 
 echo "YYYYYYYYYYYYYYYY CloudFormation deploying..."
-sam deploy  \
-    --region ${REGION} \
-    --template-file ${STAGE}-$packagedTemplate \
-    --stack-name ${STAGE}-${SERVICE} \
-    --capabilities CAPABILITY_NAMED_IAM \
-    --parameter-override Stage=${STAGE}
+sam deploy  --region ${REGION} --template-file ${STAGE}-$packagedTemplate --stack-name ${STAGE}-${SERVICE} --capabilities CAPABILITY_NAMED_IAM --parameter-override Stage=${STAGE}
 
