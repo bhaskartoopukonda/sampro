@@ -28,7 +28,9 @@ artifacts:
   files:
     - $samTemplate
     - ${deplenv}-$packagedTemplate
-    - deploy.sh 
+    - dev-$packagedTemplate
+    - staging-$packagedTemplate
+    #- deploy.sh 
   discard-paths: yes  
 #version: 0.2
 #phases:
