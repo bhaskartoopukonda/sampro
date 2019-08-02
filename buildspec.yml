@@ -18,7 +18,7 @@ artifacts:
   files:
     - $samTemplate
     - $packagedTemplate
-    - ./deploy.sh 
+    - .aws_sam/deploy.sh 
   discard-paths: yes  
 #version: 0.2
 #phases:
