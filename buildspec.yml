@@ -23,7 +23,7 @@ phases:
       - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override Stage=${deplenv} 
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
       
-      - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
+      - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..DEV" 
   #    - sam deploy --template-file staging-${packagedTemplate} --stack-name staging-stack-sam --region us-west-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
   #    - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..Staging" 
