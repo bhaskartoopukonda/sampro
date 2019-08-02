@@ -11,8 +11,11 @@ phases:
       - pip install awscli aws-sam-cli
       #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate 
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} 
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
+      - echo "YYYYYYYYYYYYYYYY CloudFormation deploying..."
+      - sam deploy --region ${region} --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --capabilities CAPABILITY_NAMED_IAM --parameter-override Stage=${deplenv}
+
 artifacts:
   #type: zip
   files:
