@@ -9,7 +9,7 @@ fi
 
 STAGE=$1
 SERVICE="some-rando-name"
-BUCKET=$2   # "$s3ArtifactBucketName"
+BUCKET=devops-poc-artifact # "$s3ArtifactBucketName"
 REGION="us-east-1"
 
 echo "CloudFormation packaging..."
