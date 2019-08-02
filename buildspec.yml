@@ -13,7 +13,7 @@ phases:
       #- npm test
       # deploy integration testing environment
       #- serverless deploy --stage test -v
-      
+      - deploy.sh $deplenv $s3ArtifactBucketName
       # integration tests
       #- npm run-script integration
       # create directory for deployment packages
@@ -33,7 +33,7 @@ artifacts:
     - $samTemplate
     - $packagedTemplate
     - echo before deploySH
-    - deploy.sh $deplenv $s3ArtifactBucketName
+    #- deploy.sh $deplenv $s3ArtifactBucketName
   discard-paths: yes  
 #version: 0.2
 #phases:
