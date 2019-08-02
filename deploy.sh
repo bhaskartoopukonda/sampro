@@ -12,13 +12,13 @@ SERVICE="some-rando-name"
 BUCKET=devops-poc-artifact # "$s3ArtifactBucketName"
 REGION="us-east-1"
 
-echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-sam cloudformation package \
-    --region ${REGION} \
-    --template-file $samTemplate \
-    --output-template-file ${STAGE}-$packagedTemplate \
-    --s3-bucket ${BUCKET} \
-    --s3-prefix sam/${SERVICE}
+#echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
+#sam cloudformation package \
+#    --region ${REGION} \
+#    --template-file $samTemplate \
+#    --output-template-file ${STAGE}-$packagedTemplate \
+#    --s3-bucket ${BUCKET} \
+#    --s3-prefix sam/${SERVICE}
 
 echo "YYYYYYYYYYYYYYYY CloudFormation deploying..."
 sam cloudformation deploy  \
