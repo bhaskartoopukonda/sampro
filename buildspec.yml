@@ -8,6 +8,7 @@ phases:
       - echo Build started on `date`
       - pip install --upgrade pip
       - pip install pipenv --user
+      - pip install awscli aws-sam-cli
       #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate 
