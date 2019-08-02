@@ -9,30 +9,31 @@ phases:
       - pip install --upgrade pip
       - pip install pipenv --user
       # linting and unit tests
-      - npm run-script lint
-      - npm test
+      #- npm run-script lint
+      #- npm test
       # deploy integration testing environment
-      - serverless deploy --stage test -v
+      #- serverless deploy --stage test -v
       
       # integration tests
-      - npm run-script integration
+      #- npm run-script integration
       # create directory for deployment packages
-      - mkdir artifacts
+      #- mkdir artifacts
       # create staging deployment package
-      - mkdir artifacts/stg
+      #- mkdir artifacts/stg
       #- serverless package --package artifacts/stg --stage stg -v
-      - sam package --template-file $samTemplateName --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplateName
+      #- sam package --template-file $samTemplateName --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplateName
       # create prod deployment package
-      - mkdir artifacts/prod
+      #- mkdir artifacts/prod
       #- serverless package --package artifacts/prod --stage prod -v
-      - sam package --template-file $samTemplateName --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplateName
+      #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
 
 artifacts:
   files:
-    - artifacts/**/*
-    - serverless.yml
-    - deploy.sh
-
+    - $samTemplate
+    - $packagedTemplate
+    - echo before deploySH
+    - deploy.sh $deplenv $s3ArtifactBucketName
+  discard-paths: yes  
 #version: 0.2
 #phases:
   #install:

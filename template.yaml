@@ -1,6 +1,9 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: SAM Application template 
+Parameters:
+  Stage:
+    Type: String
   
 Globals:
   Function:
@@ -13,6 +16,9 @@ Resources:
       CodeUri: code/
       Handler: team.handler
       Runtime: nodejs10.x
+      StageName: !Ref Stage
+      Variables:
+        Stage: !Ref Stage
       Events:
         HelloWorld:
           Type: Api 
