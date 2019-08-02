@@ -13,8 +13,9 @@ phases:
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} 
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
-      - echo "YYYYYYYYYYYYYYYY CloudFormation deploying..."
-      - sam deploy --region ${region} --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --capabilities CAPABILITY_NAMED_IAM --parameter-override Stage=${deplenv}
+      - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
+
+      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --capabilities CAPABILITY_IAM --parameter-override stage=${deplenv} --region us-east-1
 
 artifacts:
   #type: zip
