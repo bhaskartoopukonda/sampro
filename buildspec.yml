@@ -11,7 +11,7 @@ phases:
       - pip install awscli aws-sam-cli
       #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} 
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} staging-${packagedTemplate} dev-${packagedTemplate}
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
      
   post_build:
@@ -19,6 +19,8 @@ phases:
       - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
     #  - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
       - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override Stage=${deplenv} 
+      - sam deploy --template-file dev-${packagedTemplate} --stack-name dev-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override Stage=dev 
+      - sam deploy --template-file staging-${packagedTemplate} --stack-name staging-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override Stage=staging 
     
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
 artifacts:
