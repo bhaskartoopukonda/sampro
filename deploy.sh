@@ -19,7 +19,7 @@ REGION="us-east-1"
 #    --output-template-file ${STAGE}-$packagedTemplate \
 #    --s3-bucket ${BUCKET} \
 #    --s3-prefix sam/${SERVICE}
-
+cd ~/.aws_sam
 echo "YYYYYYYYYYYYYYYY CloudFormation deploying..."
 sam deploy  --region ${REGION} --template-file ${STAGE}-$packagedTemplate --stack-name ${STAGE}-${SERVICE} --capabilities CAPABILITY_NAMED_IAM --parameter-override Stage=${STAGE}
 
