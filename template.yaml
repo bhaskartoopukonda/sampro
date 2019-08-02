@@ -72,7 +72,7 @@ Resources:
             Action:
               - "lambda:InvokeFunction"
             Resource: !Ref returnS3Buckets.Version
-      FunctionName: 'CodeDeployHook_preTrafficHook_rollback'
+      FunctionName: 'CodeDeployHook_preTrafficHook_2AUG'
       DeploymentPreference:
         Enabled: false
       Timeout: 5
