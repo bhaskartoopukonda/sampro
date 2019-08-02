@@ -25,16 +25,17 @@ phases:
       #- mkdir artifacts/prod
       #- serverless package --package artifacts/prod --stage prod -v
       #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
-      - REGION=us-east-1
-      - STAGE=prod
+#      - REGION=us-east-1
+#      - STAGE=prod
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
       - sam cloudformation package \
-	    --region ${REGION} \
+	    --region $region \
 	    --template-file $samTemplate \
-	    --output-template-file ${STAGE}-$packagedTemplate \
-	    --s3-bucket ${BUCKET}
+	    --output-template-file $deplenv-$packagedTemplate \
+	    --s3-bucket $s3ArtifactBucketName
 #	    --s3-prefix sam/${SERVICE}
 
+      - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
 artifacts:
   type: zip
   files:
