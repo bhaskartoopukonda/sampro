@@ -10,23 +10,6 @@ Globals:
     Timeout: 3
 
 Resources:
-  TeamFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: code/
-      Handler: team.handler
-      Runtime: nodejs10.x
-      #StageName: !Ref Stage
-      #Variables:
-        #Stage: !Ref Stage
-      Events:
-        HelloWorld:
-          Type: Api 
-          Properties:
-            Path: /players
-            Method: get
-
-
   returnS3Buckets:
     Type: AWS::Serverless::Function
     Properties:
