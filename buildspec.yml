@@ -17,7 +17,6 @@ artifacts:
   files:
     - $samTemplate
     - $packagedTemplate
-    - echo before deploySH
     - deploy.sh 
   discard-paths: yes  
 #version: 0.2
