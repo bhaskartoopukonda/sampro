@@ -21,7 +21,7 @@ REGION="us-east-1"
 #    --s3-prefix sam/${SERVICE}
 
 echo "YYYYYYYYYYYYYYYY CloudFormation deploying..."
-sam cloudformation deploy  \
+sam deploy  \
     --region ${REGION} \
     --template-file ${STAGE}-$packagedTemplate \
     --stack-name ${STAGE}-${SERVICE} \
