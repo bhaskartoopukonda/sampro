@@ -15,14 +15,7 @@ phases:
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file DEV-${packagedTemplate} 
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file STG-${packagedTemplate} 
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
-     
-  post_build:
-    commands:
-      - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
-    #  - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
-      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override Stage=${deplenv} 
-      - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
-      # Upload Packaged Output template Yaml files to S3 bucket
+  #### Upload Packaged Output template Yaml files to S3 bucket
       - mkdir pkg 
       - cp $samTemplate ${deplenv}-$packagedTemplate DEV-$packagedTemplate STG-$packagedTemplate /pkg
       - echo uploading the templates to S3
@@ -30,8 +23,14 @@ phases:
       - zip -r $current_time.sam.zip $samTemplateName $packagedTemplateName
       - aws s3 cp $current_time.sam.zip s3://$s3ArtifactBucketName/$current_time.sam.zip
       - echo Templates Upoaded to $s3ArtifactBucketName on `date`
-
-      
+  post_build:
+    commands:
+     
+      - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
+    #  - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
+      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override Stage=${deplenv} 
+      - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
+     
    #   - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
    #   - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..DEV" 
   #    - sam deploy --template-file staging-${packagedTemplate} --stack-name staging-stack-sam --region us-west-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
