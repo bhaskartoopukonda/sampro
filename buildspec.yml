@@ -16,11 +16,11 @@ phases:
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file STG-${packagedTemplate} 
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
   #### Upload Packaged Output template Yaml files to S3 bucket
-      - mkdir pkg 
-      - cp $samTemplate ${deplenv}-$packagedTemplate DEV-$packagedTemplate STG-$packagedTemplate pkg
+      - mkdir pkgTemplates 
+      - cp $samTemplate ${deplenv}-$packagedTemplate DEV-$packagedTemplate STG-$packagedTemplate pkgTemplates/
       - echo uploading the templates to S3
       - current_time=$(date "+%Y.%m.%d-%H.%M.%S") 
-      - zip -r $current_time.sam.zip $samTemplateName $packagedTemplateName
+      - zip -r $current_time.sam.zip pkgTemplates
       - aws s3 cp $current_time.sam.zip s3://$s3ArtifactBucketName/$current_time.sam.zip
       - echo Templates Upoaded to $s3ArtifactBucketName on `date`
   post_build:
