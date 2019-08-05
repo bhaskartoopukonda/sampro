@@ -11,9 +11,9 @@ phases:
       - pip install awscli aws-sam-cli
       #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} --parameters { FunctionNameSuffix : ${deplenv} }
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file DEV-${packagedTemplate} --parameters { FunctionNameSuffix : DEV }
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file STG-${packagedTemplate} --parameters { FunctionNameSuffix : STG }
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} #--parameters { FunctionNameSuffix : ${deplenv} }
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file DEV-${packagedTemplate} #--parameters { FunctionNameSuffix : DEV }
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file STG-${packagedTemplate} #--parameters { FunctionNameSuffix : STG }
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
   #### Upload Packaged Output template Yaml files to S3 bucket
       - mkdir pkgTemplates 
@@ -27,11 +27,11 @@ phases:
     commands:
       
       - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
-      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override Stage=${deplenv} 
+      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override FunctionNameSuffix=${deplenv} 
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
-      - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
+      - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override FunctionNameSuffix=DEV 
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..DEV" 
-      - sam deploy --template-file STG-${packagedTemplate} --stack-name staging-stack-sam --region us-west-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND 
+      - sam deploy --template-file STG-${packagedTemplate} --stack-name staging-stack-sam --region us-west-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override FunctionNameSuffix=STG
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..Staging" 
 
 artifacts:
