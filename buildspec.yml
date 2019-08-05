@@ -27,11 +27,11 @@ phases:
     commands:
       
       - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
-      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override FunctionNameSuffix=${deplenv} 
+      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
-      - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override FunctionNameSuffix=DEV 
+      - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override ParameterKey=FunctionNameSuffix,ParameterValue=DEV 
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..DEV" 
-      - sam deploy --template-file STG-${packagedTemplate} --stack-name staging-stack-sam --region us-west-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override FunctionNameSuffix=STG
+      - sam deploy --template-file STG-${packagedTemplate} --stack-name staging-stack-sam --region us-west-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override ParameterKey=FunctionNameSuffix,ParameterValue=STG
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..Staging" 
 
 artifacts:
