@@ -11,9 +11,9 @@ phases:
       - pip install awscli aws-sam-cli
       #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket ${deplenv}-$s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} #--parameters { FunctionNameSuffix : ${deplenv} }
-      - sam package --template-file $samTemplate --s3-bucket dev-$s3ArtifactBucketName --output-template-file DEV-${packagedTemplate} #--parameters { FunctionNameSuffix : DEV }
-      - sam package --template-file $samTemplate --s3-bucket staging-$s3ArtifactBucketName --output-template-file STG-${packagedTemplate} #--parameters { FunctionNameSuffix : STG }
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} #--parameters { FunctionNameSuffix : ${deplenv} }
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file DEV-${packagedTemplate} #--parameters { FunctionNameSuffix : DEV }
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file STG-${packagedTemplate} #--parameters { FunctionNameSuffix : STG }
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
   #### Upload Packaged Output template Yaml files to S3 bucket
       - mkdir pkgTemplates 
