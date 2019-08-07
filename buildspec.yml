@@ -13,6 +13,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`  
+      - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} #--parameters { FunctionNameSuffix : ${deplenv} }
       
       - appPrefix="SAM_"  
         
@@ -25,9 +27,7 @@ phases:
       - srcVer=$CODEBUILD_SOURCE_VERSION  
   
       - echo $CODEBUILD_SOURCE_VERSION  
-      - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} #--parameters { FunctionNameSuffix : ${deplenv} }
-      
+     
       - indx=$(echo $CODEBUILD_SOURCE_VERSION | grep -q ^arn ; echo $?)  
   
       - |  
