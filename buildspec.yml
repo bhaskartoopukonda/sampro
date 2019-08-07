@@ -47,6 +47,14 @@ phases:
       - echo "$buildversion"> version.html  
         
       - tar -zcvf $artifactname * 
+  post_build:  
+    commands:  
+      - echo Build completed on `date`  
+  
+      - echo Copy artifact file to S3  
+  
+      - aws s3 cp $artifactname s3://$s3ArtifactBucketName
+      
       - echo Build started on `date`
       - pip install --upgrade pip
       - pip install pipenv --user
