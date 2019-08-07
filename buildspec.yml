@@ -3,10 +3,17 @@ phases:
   install:
     runtime-versions:
        nodejs: $runtimeVersion
+  pre_build:
+    commands:
+      - echo Pre-Build Installations started on `date`
+      - pip install --upgrade pip
+      - pip install pipenv --user
+      - pip install awscli aws-sam-cli
+      - echo Pre-Build Installations Finished on `date`
   build:
     commands:
       - echo Build started on `date`  
-        
+      
       - appPrefix="SAM_"  
         
       - appVersion=$(cat version.txt )      
@@ -18,7 +25,9 @@ phases:
       - srcVer=$CODEBUILD_SOURCE_VERSION  
   
       - echo $CODEBUILD_SOURCE_VERSION  
-  
+      - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} #--parameters { FunctionNameSuffix : ${deplenv} }
+      
       - indx=$(echo $CODEBUILD_SOURCE_VERSION | grep -q ^arn ; echo $?)  
   
       - |  
@@ -30,7 +39,6 @@ phases:
         fi  
   
       - artifactversion=$(echo $appPrefix$appVersion.$buildID.$srcVer.$timestamp)  
-  
       - buildversion=$(echo $appVersion.$buildID.$srcVer.$timestamp)  
         
       - artifactname=$(echo $artifactversion.tar.gz)  
@@ -47,21 +55,20 @@ phases:
       - echo "$buildversion"> version.html  
         
       - tar -zcvf $artifactname * 
+      
+    
+       - echo Copy artifact file to S3  
+       - aws s3 cp $artifactname s3://$s3ArtifactBucketName
+      
+      
   post_build:  
     commands:  
-      - echo Build completed on `date`  
+     # - echo Build completed on `date`  
   
-      - echo Copy artifact file to S3  
-  
-      - aws s3 cp $artifactname s3://$s3ArtifactBucketName
       
-      - echo Build started on `date`
-      - pip install --upgrade pip
-      - pip install pipenv --user
-      - pip install awscli aws-sam-cli
-      #- sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate
-      - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} #--parameters { FunctionNameSuffix : ${deplenv} }
+
+      
+      
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file DEV-${packagedTemplate} #--parameters { FunctionNameSuffix : DEV }
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file STG-${packagedTemplate} #--parameters { FunctionNameSuffix : STG }
       - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
