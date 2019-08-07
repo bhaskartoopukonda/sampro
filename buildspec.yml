@@ -40,7 +40,7 @@ phases:
   
       #- npm run build   
   
-      - cd dist  
+      #- cd dist  
         
       - touch version.html  
   
@@ -88,7 +88,7 @@ artifacts:
   type: zip
   files:
     #- '**/*'
-    - dist/version.html
+    - version.html
     - env.txt 
     - $samTemplate
     - ${deplenv}-$packagedTemplate
