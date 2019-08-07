@@ -36,9 +36,9 @@ phases:
       - artifactname=$(echo $artifactversion.tar.gz)  
       
       #- echo $ANSIBLE_INVENTORY > env.txt 
-      - npm install  
+      #- npm install  
   
-      - npm run build   
+      #- npm run build   
   
       - cd dist  
         
