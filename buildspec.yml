@@ -36,13 +36,13 @@ phases:
   
         fi  
   
-      - artifactversion=$(echo $appPrefix$appVersion.$buildID.$srcVer.$timestamp.$packagedTemplate)  
+      - artifactversion=$(echo $appPrefix$appVersion.$buildID.$srcVer.$timestamp.$packagedTemplat)  
       - buildversion=$(echo $appVersion.$buildID.$srcVer.$timestamp)  
         
       - artifactname=$(echo $artifactversion)  
       
       - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file artifactname #--parameters { FunctionNameSuffix : ${deplenv} }
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate #--parameters { FunctionNameSuffix : ${deplenv} }
           
       
       #- echo $ANSIBLE_INVENTORY > env.txt 
@@ -101,7 +101,7 @@ artifacts:
     - version.html
     - env.txt 
     - $samTemplate
-    - artifactname
+    - $packagedTemplate
     #- ${deplenv}-$packagedTemplate
     #- DEV-$packagedTemplate
     #- STG-$packagedTemplate
