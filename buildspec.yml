@@ -13,9 +13,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`  
-      - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
-      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file ${deplenv}-${packagedTemplate} #--parameters { FunctionNameSuffix : ${deplenv} }
-      
+   
       - appPrefix="SAM_"  
         
       - appVersion=$(cat version.txt )      
@@ -38,10 +36,14 @@ phases:
   
         fi  
   
-      - artifactversion=$(echo $appPrefix$appVersion.$buildID.$srcVer.$timestamp)  
+      - artifactversion=$(echo $appPrefix$appVersion.$buildID.$srcVer.$timestamp.$packagedTemplate)  
       - buildversion=$(echo $appVersion.$buildID.$srcVer.$timestamp)  
         
-      - artifactname=$(echo $artifactversion.tar.gz)  
+      - artifactname=$(echo $artifactversion)  
+      
+      - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
+      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file artifactname #--parameters { FunctionNameSuffix : ${deplenv} }
+          
       
       #- echo $ANSIBLE_INVENTORY > env.txt 
       #- npm install  
@@ -84,9 +86,9 @@ phases:
   post_build:
     commands:
       
-      - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
-      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
-      - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
+   #   - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
+   #   - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
+   #   - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
      # - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override ParameterKey=FunctionNameSuffix,ParameterValue=DEV 
      # - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..DEV" 
      # - sam deploy --template-file STG-${packagedTemplate} --stack-name staging-stack-sam --region us-west-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override ParameterKey=FunctionNameSuffix,ParameterValue=STG
@@ -99,9 +101,10 @@ artifacts:
     - version.html
     - env.txt 
     - $samTemplate
-    - ${deplenv}-$packagedTemplate
-    - DEV-$packagedTemplate
-    - STG-$packagedTemplate
+    - artifactname
+    #- ${deplenv}-$packagedTemplate
+    #- DEV-$packagedTemplate
+    #- STG-$packagedTemplate
     #- deploy.sh 
   discard-paths: yes  
 #version: 0.2
