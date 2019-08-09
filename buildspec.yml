@@ -36,7 +36,7 @@ phases:
   
         fi  
   
-      - artifactversion=$(echo $appPrefix$appVersion.$buildID.$srcVer.$timestamp.$packagedTemplat)  
+      - artifactversion=$(echo $appPrefix$appVersion.$buildID.$srcVer.$timestamp)  
       - buildversion=$(echo $appVersion.$buildID.$srcVer.$timestamp)  
         
       - artifactname=$(echo $artifactversion)  
