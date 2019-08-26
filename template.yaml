@@ -5,7 +5,7 @@ Description: SAM Application template
 Parameters:
     FunctionNameSuffix:
         Type: String
-        Default: ""
+        Default: "$FunctionSuffix"
   
 Globals:
   Function:
