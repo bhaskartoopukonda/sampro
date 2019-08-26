@@ -32,7 +32,7 @@ exports.handler = (event, context, callback) => {
 			var result = JSON.parse(data.Payload);
 			console.log("Result: " +  JSON.stringify(result));
 
-			if(result.body >= 27){	
+			if(result.body == 27 || result.body == 32){	
 				lambdaResult = "Succeeded";
 				console.log ("Validation testing succeeded!");
 			}
