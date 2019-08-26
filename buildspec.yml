@@ -64,8 +64,8 @@ phases:
       - aws s3 cp $artifactname s3://$s3ArtifactBucketName
       
       
-  post_build:  
-    commands:  
+#  post_build:  
+#    commands:  
      # - echo Build completed on `date`  
   
       
@@ -86,8 +86,8 @@ phases:
   post_build:
     commands:
       
-   #   - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
-   #   - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
+      - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
+      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
    #   - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
      # - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override ParameterKey=FunctionNameSuffix,ParameterValue=DEV 
      # - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..DEV" 
