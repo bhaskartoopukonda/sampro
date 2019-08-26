@@ -2,10 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: SAM Application template 
  
-Parameters:
-    FunctionNameSuffix:
-        Type: String
-        Default: "$FunctionSuffix"
+#Parameters:
+#    FunctionNameSuffix:
+#        Type: String
+#        Default: "$FunctionSuffix"
   
 Globals:
   Function:
@@ -58,7 +58,7 @@ Resources:
             Action:
               - "lambda:InvokeFunction"
             Resource: !Ref returnS3Buckets.Version
-      FunctionName: !Sub "CodeDeployHook_preTrafficHook_${FunctionNameSuffix}"
+      FunctionName: !Sub "CodeDeployHook_preTrafficHook_sam"
       #FunctionName: !Sub "mylambda-${FunctionNameSuffix}"
       DeploymentPreference:
         Enabled: false
