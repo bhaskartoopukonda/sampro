@@ -58,7 +58,7 @@ Resources:
             Action:
               - "lambda:InvokeFunction"
             Resource: !Ref returnS3Buckets.Version
-      FunctionName: !Sub "CodeDeployHook_preTrafficHook_sam"
+      FunctionName: !Sub "CodeDeployHook_preTrafficHook_idx"
       #FunctionName: !Sub "mylambda-${FunctionNameSuffix}"
       DeploymentPreference:
         Enabled: false
