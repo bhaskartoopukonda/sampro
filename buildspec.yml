@@ -41,17 +41,9 @@ phases:
         
       - artifactname=$(echo $artifactversion.tar.gz)  
       
-      - echo "XXXXXXXXXXXXXXXX CloudFormation packaging..."
+      - echo "CloudFormation packaging..."
       - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplate #--parameters { FunctionNameSuffix : ${deplenv} }
-          
-      
-      #- echo $ANSIBLE_INVENTORY > env.txt 
-      #- npm install  
-  
-      #- npm run build   
-  
-      #- cd dist  
-        
+     
       - touch version.html  
   
       - echo "$buildversion"> version.html  
@@ -62,69 +54,18 @@ phases:
       - echo 'Artifact name :::::'  $artifactname
       - echo Copy artifact file to S3  
       - aws s3 cp $artifactname s3://$s3ArtifactBucketName
-      
-      
-#  post_build:  
-#    commands:  
-     # - echo Build completed on `date`  
   
-      
-
-      
-      
-#      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file DEV-${packagedTemplate} #--parameters { FunctionNameSuffix : DEV }
-#      - sam package --template-file $samTemplate --s3-bucket $s3ArtifactBucketName --output-template-file STG-${packagedTemplate} #--parameters { FunctionNameSuffix : STG }
-#      - echo "XXXXXXXXXXXXXXX CloudFormation packaging.. DONE."
-  #### Upload Packaged Output template Yaml files to S3 bucket
- #     - mkdir pkgTemplates 
- #     - cp $samTemplate ${deplenv}-$packagedTemplate DEV-$packagedTemplate STG-$packagedTemplate pkgTemplates/
- #     - echo uploading the templates to S3
- #     - current_time=$(date "+%Y.%m.%d-%H.%M.%S") 
- #     - zip -r $current_time.sam.zip pkgTemplates
- #     - aws s3 cp $current_time.sam.zip s3://$s3ArtifactBucketName/$current_time.sam.zip
- #     - echo Templates Upoaded to $s3ArtifactBucketName on `date`
   post_build:
     commands:
       
-      - echo "YYYYYYYYYYYYYYYY CloudFormation deploying...$deplenv" 
-      - sam deploy --template-file ${deplenv}-${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
-   #   - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..$deplenv" 
-     # - sam deploy --template-file DEV-${packagedTemplate} --stack-name dev-stack-sam --region us-east-2 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override ParameterKey=FunctionNameSuffix,ParameterValue=DEV 
-     # - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..DEV" 
-     # - sam deploy --template-file STG-${packagedTemplate} --stack-name staging-stack-sam --region us-west-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override ParameterKey=FunctionNameSuffix,ParameterValue=STG
-     # - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..Staging" 
+      - echo "CloudFormation deploying...$deplenv" 
+      - sam deploy --template-file ${packagedTemplate} --stack-name ${deplenv}-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
+      - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..${deplenv}" 
 
 artifacts:
-  #type: zip
   files:
-    #- '**/*'
     - version.html
     - env.txt 
     - $samTemplate
     - $packagedTemplate
-    #- ${deplenv}-$packagedTemplate
-    #- DEV-$packagedTemplate
-    #- STG-$packagedTemplate
-    #- deploy.sh 
   discard-paths: yes  
-#version: 0.2
-#phases:
-  #install:
-    #runtime-versions:
-       #nodejs: $runtimeVersion
-  #build:
-    #commands:
-      #- echo Build started on `date`
-      #- pip install --upgrade pip
-      #- pip install pipenv --user
-      #- pip install awscli aws-sam-cli
- #     - sam package --template-file template.yaml --s3-bucket s3ArtifactBucketName --output-template-file packaged.yaml
-      #- sam package --template-file $samTemplateName --s3-bucket $s3ArtifactBucketName --output-template-file $packagedTemplateName
-  #post_build:
-    #commands:
-      #- echo Build completed on `date`
-#artifacts:
-  #type: zip
-  #files:
-    #- '**/*'
-  #discard-paths: yes
