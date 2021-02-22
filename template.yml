@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: 2010-09-09
+# Transform section specifies one or more macros that AWS CloudFormation uses to process your template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
+Transform: AWS::Serverless-2016-10-31
+
+ 
+
+# Shared configuration for all resources, more in
+# https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+
+ 
+
+Globals:
+  Function:
+    # Runtime used by all functions of this serverless application
+    Runtime: nodejs8.10
+    
+Resources:
+  BasicAWSApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: Basic AWS Api Gateway
+      StageName: Dev
+
+ 
+
+  returnS3Buckets:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: bucketlist.handler
+      Runtime: nodejs 10
+      CodeUri: code/
+      AutoPublishAlias: live
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action:
+              - "s3:ListAllMyBuckets"
+            Resource: '*'
+      
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            RestApiId: !Ref BasicAWSApiGateway
+            Path: /test
+            Method: GET
