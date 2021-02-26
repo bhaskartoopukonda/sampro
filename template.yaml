@@ -13,7 +13,7 @@ Transform: AWS::Serverless-2016-10-31
 Globals:
   Function:
     # Runtime used by all functions of this serverless application
-    Runtime: nodejs8.10
+    Runtime: nodejs10
     
 Resources:
   BasicAWSApiGateway:
