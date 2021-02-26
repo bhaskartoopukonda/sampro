@@ -28,7 +28,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: bucketlist.handler
-      Runtime: nodejs 10
+      Runtime: nodejs8.10
       CodeUri: code/
       AutoPublishAlias: live
       Policies:
