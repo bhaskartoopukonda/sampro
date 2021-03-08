@@ -16,7 +16,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: bucketlist.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs10
       CodeUri: code/
       AutoPublishAlias: live
       Policies:
@@ -38,31 +38,4 @@ Resources:
             Path: /test
             Method: get
 
-  preTrafficHook:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: preTrafficHook.handler
-      Runtime: nodejs8.10
-      CodeUri: code/
-      Policies:
-        - Version: "2012-10-17"
-          Statement:
-          - Effect: "Allow"
-            Action:
-              - "codedeploy:PutLifecycleEventHookExecutionStatus"
-            Resource:
-              !Sub 'arn:aws:codedeploy:${AWS::Region}:${AWS::AccountId}:deploymentgroup:${ServerlessDeploymentApplication}/*'
-        - Version: "2012-10-17"
-          Statement:
-          - Effect: "Allow"
-            Action:
-              - "lambda:InvokeFunction"
-            Resource: !Ref returnS3Buckets.Version
-      FunctionName: !Sub "CodeDeployHook_preTrafficHook_idx"
-      #FunctionName: !Sub "mylambda-${FunctionNameSuffix}"
-      DeploymentPreference:
-        Enabled: false
-      Timeout: 5
-      Environment:
-        Variables:
-          NewVersion: !Ref returnS3Buckets.Version
+  
