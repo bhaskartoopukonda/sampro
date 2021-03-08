@@ -26,11 +26,11 @@ Resources:
             Action:
               - "s3:ListAllMyBuckets"
             Resource: '*'
-      DeploymentPreference:
+      #DeploymentPreference:
           #Type: Linear10PercentEvery1Minute
-          Type: AllAtOnce
-          Hooks:
-            PreTraffic: !Ref preTrafficHook
+          #Type: AllAtOnce
+          #Hooks:
+            #PreTraffic: !Ref preTrafficHook
       Events:
         Api:
           Type: Api
