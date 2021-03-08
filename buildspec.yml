@@ -59,7 +59,7 @@ phases:
     commands:
       
       - echo "CloudFormation deploying...$deplenv" 
-      - sam deploy --template-file ${packagedTemplate} --stack-name ${deplenv}-1-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND #--parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
+      - sam deploy --template-file ${packagedTemplate} --stack-name ${deplenv}-1-stack-sam --region us-east-1 --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --resolve-s3 #--parameter-override  ParameterKey=FunctionNameSuffix,ParameterValue=${deplenv} 
       - echo "YYYYYYYYYYYYYYYY CloudFormation deployment.DONE For..${deplenv}" 
 
 artifacts:
