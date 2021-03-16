@@ -26,17 +26,38 @@ Resources:
             Action:
               - "s3:ListAllMyBuckets"
             Resource: '*'
+Resources:
+  BasicAWSApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: Basic AWS Api Gateway
+      StageName: Staging
+
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Events:
+        HelloWorldApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref BasicAWSApiGateway
+            Path: /hello
+            Method: GET       
       #DeploymentPreference:
           #Type: Linear10PercentEvery1Minute
           #Type: AllAtOnce
           #Hooks:
             #PreTraffic: !Ref preTrafficHook
-      Events:
-        Api:
-          HttpPost:
-          Type: Api
-          Properties:
-            Path: /test
-            Method: post
+      #Events:
+       # Api:
+        #  HttpPost:
+         # Type: Api
+          #Properties:
+           # Path: /test
+            #Method: post
+            
 
   
