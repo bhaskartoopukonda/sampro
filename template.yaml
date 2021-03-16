@@ -33,9 +33,10 @@ Resources:
             #PreTraffic: !Ref preTrafficHook
       Events:
         Api:
+          HttpPost:
           Type: Api
           Properties:
             Path: /test
-            Method: get
+            Method: post
 
   
