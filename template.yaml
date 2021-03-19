@@ -45,7 +45,7 @@ Resources:
           Properties:
             RestApiId: !Ref BasicAWSApiGateway
             Path: /hello
-            Method: GET       
+            Method: GET
       #DeploymentPreference:
           #Type: Linear10PercentEvery1Minute
           #Type: AllAtOnce
