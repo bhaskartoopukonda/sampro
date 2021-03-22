@@ -31,7 +31,7 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       Name: Basic AWS Api Gateway
-      StageName: Staging
+      StageName: Test
 
   HelloWorldFunction:
     Type: AWS::Serverless::Function
