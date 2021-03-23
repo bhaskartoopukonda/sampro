@@ -21,4 +21,4 @@ Resources:
       Handler: index.handler
       InlineCode: |
         def handler(event, context):
-            return {'body': 'Hello World!', 'statusCode': 200}
+            return {'body': 'Hello Idexcel!', 'statusCode': 200}
