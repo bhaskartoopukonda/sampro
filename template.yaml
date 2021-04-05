@@ -10,7 +10,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       #CodeUri: NotificationService/ArchiveNotification
-      #Handler: ArchiveNotificationItems.handler
+      Handler: ArchiveNotificationItems.handler
       Runtime: nodejs12.x
       AutoPublishAlias: live
       Policies:
