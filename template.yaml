@@ -10,7 +10,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       #CodeUri: NotificationService/ArchiveNotification
-      #Handler: ArchiveNotificationItems.handler
+      Handler: ArchiveNotificationItems.handler
       Runtime: nodejs12.x
       AutoPublishAlias: live
       Policies:
@@ -25,4 +25,8 @@ Resources:
           Properties:
             Path: /
             Method: get
- 
+            RestApiId:
+              Ref: ArchiveNotificationsData
+      InlineCode: |
+        def handler(event, context):
+            return {'body': 'Idexcel Automation!', 'statusCode': 200}
