@@ -25,3 +25,10 @@ Resources:
           Properties:
             Path: /
             Method: get
+            RestApiId:
+              Ref: ApiGatewayApi
+      Runtime: nodejs12.x
+      Handler: index.handler
+      InlineCode: |
+        def handler(event, context):
+            return {'body': 'Idexcel Automation!', 'statusCode': 200}
