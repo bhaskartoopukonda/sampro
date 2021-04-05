@@ -25,22 +25,4 @@ Resources:
           Properties:
             Path: /
             Method: get
-  ClearAllViewNotifications:
-    Type: AWS::Serverless::Function
-    Properties:
-      #CodeUri: NotificationService/ClearNotification
-      Handler: ClearAllViewNotifications.handler
-      Runtime: nodejs12.x
-      AutoPublishAlias: live
-      Policies:
-        - Version: "2012-10-17"
-          Statement:
-          - Effect: "Allow"
-            Action: '*'
-            Resource: '*'
-      Events:
-        ClearNotification:
-          Type: Api 
-          Properties:
-            Path: /
-            Method: get    
+  
