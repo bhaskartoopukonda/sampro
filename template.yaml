@@ -28,7 +28,7 @@ Resources:
             RestApiId:
               Ref: ApiGatewayApi
       Runtime: nodejs12.x
-      Handler: index.handler
+      Handler: ArchiveNotificationItems.handler
       InlineCode: |
         def handler(event, context):
             return {'body': 'Idexcel Automation!', 'statusCode': 200}
