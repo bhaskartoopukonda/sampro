@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Application template 
+  
+Globals:
+  Function:
+    Timeout: 150
+Resources:
+  ArchiveNotificationsData:
+    Type: AWS::Serverless::Function
+    Properties:
+      #CodeUri: NotificationService/ArchiveNotification
+      #Handler: ArchiveNotificationItems.handler
+      Runtime: nodejs12.x
+      AutoPublishAlias: live
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action: '*'
+            Resource: '*'
+      Events:
+        ArchiveNotification:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: get
