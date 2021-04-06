@@ -1,9 +1,19 @@
-const serverless = require('serverless-http');
-const express = require('express')
-const app = express()
+module.exports.handler = async event => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: playerList()
+      },
+      null,
+      2
+    )
+  };
+};const playerList = () => {
+  return [
+    { name: "Manoj", number: 23 },
+    { name: "Rajesh", number: 11 },
+    { name: "Baman", number: 2 }
+  ];
+};
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
-
-module.exports.handler = serverless(app);
