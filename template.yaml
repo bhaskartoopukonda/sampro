@@ -1,11 +1,10 @@
-AWSTemplateFormatVersion : '2010-09-09'
+AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Resources:
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: index.handler
-      Runtime: nodejs12.x
+Description: SAM Application template 
+  
+Globals:
+  Function:
+    Timeout: 150
 Resources:
   ApiGatewayApi:
     Type: AWS::Serverless::Api
@@ -24,6 +23,24 @@ Resources:
               Ref: ApiGatewayApi
       Runtime: nodejs12.x
       Handler: index.handler
-
+  ArchiveNotificationsData:
+    Type: AWS::Serverless::Function
+    Properties:
+      #CodeUri: NotificationService/ArchiveNotification
+      Handler: index.handler
+      Runtime: nodejs12.x
+      AutoPublishAlias: live
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action: '*'
+            Resource: '*'
+      Events:
+        ApiEvent:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: get 
 
   
