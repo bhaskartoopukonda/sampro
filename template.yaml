@@ -36,12 +36,12 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      Events:
-        ApiEvent:
-          Type: Api 
-          Properties:
-            Path: /
-            Method: get 
+      #Events:
+        #ApiEvent:
+          #Type: Api 
+          #Properties:
+           # Path: /
+            #Method: get 
   ClearAllViewNotifications:
     Type: AWS::Serverless::Function
     Properties:
@@ -55,12 +55,12 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      Events:
-        ClearNotification:
-          Type: Api 
-          Properties:
-            Path: /
-            Method: get
+      #Events:
+       # ClearNotification:
+        #  Type: Api 
+         # Properties:
+          #  Path: /
+           # Method: get
   GetNotifications:
     Type: AWS::Serverless::Function
     Properties:
@@ -78,12 +78,12 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      Events:
-        FetchNotification:
-          Type: Api 
-          Properties:
-            Path: /
-            Method: get
+      #Events:
+       # FetchNotification:
+        #  Type: Api 
+         # Properties:
+          #  Path: /
+           # Method: get
   SaveNotifications:
     Type: AWS::Serverless::Function
     Properties:
@@ -97,12 +97,12 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      Events:
-        SaveNotification:
-          Type: Api 
-          Properties:
-            Path: /
-            Method: get
+     # Events:
+      #  SaveNotification:
+       #   Type: Api 
+        #  Properties:
+         #   Path: /
+          #  Method: get
   SendNotifications:
     Type: AWS::Serverless::Function
     Properties:
@@ -116,12 +116,12 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      Events:
-        SendNotification:
-          Type: Api 
-          Properties:
-            Path: /
-            Method: get
+      #Events:
+       # SendNotification:
+        #  Type: Api 
+         # Properties:
+          #  Path: /
+           # Method: get
   ViewNotificationStatusUpdate:
     Type: AWS::Serverless::Function
     Properties:
@@ -135,10 +135,9 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      Events:
-        UpdateStatusofViewNotification:
-          Type: Api 
-          Properties:
-            Path: /
-            Method: get
-  
+      #Events:
+       # UpdateStatusofViewNotification:
+        #  Type: Api 
+         # Properties:
+          #  Path: /
+           # Method: get
