@@ -13,7 +13,7 @@ module.exports.handler = async event => {
   return [
     { Name: "Manoj", Desg: "Idexcel_Devops" },
     { Name: "Rajesh", Desg: "Idexcel_CYNC" },
-    { Name: "Ram", Desg: "Idexcel_CYNC-LOS" }
+    { Name: "Ram", Desg: "Idexcel-CYNC-LOS" }
   ];
 };
 
