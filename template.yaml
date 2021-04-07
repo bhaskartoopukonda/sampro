@@ -42,5 +42,103 @@ Resources:
           Properties:
             Path: /
             Method: get 
-
+  ClearAllViewNotifications:
+    Type: AWS::Serverless::Function
+    Properties:
+      #CodeUri: NotificationService/ClearNotification
+      Handler: index.handler
+      Runtime: nodejs12.x
+      AutoPublishAlias: live
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action: '*'
+            Resource: '*'
+      Events:
+        ClearNotification:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: get
+  GetNotifications:
+    Type: AWS::Serverless::Function
+    Properties:
+      #CodeUri: NotificationService/FetchNotification
+      Handler: index.handler
+      Runtime: nodejs12.x
+      #Tags:
+        #Project: CYNC
+        #Environment: DEV
+       # LambdaId: DEV-lAMBDA
+      AutoPublishAlias: live
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action: '*'
+            Resource: '*'
+      Events:
+        FetchNotification:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: get
+  SaveNotifications:
+    Type: AWS::Serverless::Function
+    Properties:
+      #CodeUri: NotificationService/SaveNotification
+      Handler: index.handler
+      Runtime: nodejs12.x
+      AutoPublishAlias: live
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action: '*'
+            Resource: '*'
+      Events:
+        SaveNotification:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: get
+  SendNotifications:
+    Type: AWS::Serverless::Function
+    Properties:
+      #CodeUri: NotificationService/SendNotification
+      Handler: index.handler
+      Runtime: nodejs12.x
+      AutoPublishAlias: live
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action: '*'
+            Resource: '*'
+      Events:
+        SendNotification:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: get
+  ViewNotificationStatusUpdate:
+    Type: AWS::Serverless::Function
+    Properties:
+      #CodeUri: NotificationService/UpdateStatusofViewNotification
+      Handler: index.handler
+      Runtime: nodejs12.x
+      AutoPublishAlias: live
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action: '*'
+            Resource: '*'
+      Events:
+        UpdateStatusofViewNotification:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: get
   
