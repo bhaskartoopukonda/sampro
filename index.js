@@ -11,7 +11,7 @@ module.exports.handler = async event => {
   };
 };const playerList = () => {
   return [
-    { Name: "Manoj", Desg: "Idexcel_Devops" },
+    { Name: "Manoj", Desg: "Idexcel_DevOps" },
     { Name: "Rajesh", Desg: "Idexcel_CYNC" },
     { Name: "Ram", Desg: "Idexcel-CYNC-LOS" }
   ];
