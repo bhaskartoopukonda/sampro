@@ -14,13 +14,13 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
           Type: Api
-      Events:
-        ApiEvent:
-          Properties:
-            Path: /code
-            Method: get
-            RestApiId:
-              Ref: ApiGatewayApi
+      #Events:
+       # ApiEvent:
+        #  Properties:
+         #   Path: /code
+          #  Method: get
+           # RestApiId:
+            #  Ref: ApiGatewayApi
       Runtime: nodejs12.x
       Handler: index.handler
   ArchiveNotificationsData:
