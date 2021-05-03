@@ -13,11 +13,11 @@ Resources:
   ApiFunction: # Adds a GET api endpoint at "/" to the ApiGatewayApi via an Api event
     Type: AWS::Serverless::Function
     Properties:
+          Type: Api
       Events:
         ApiEvent:
-          Type: Api
           Properties:
-            Path: /code
+            Path: /
             Method: get
             RestApiId:
               Ref: ApiGatewayApi
