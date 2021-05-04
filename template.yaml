@@ -19,6 +19,8 @@ Resources:
           Properties:
             Path: /code
             Method: get
+            RestApiId:
+              Ref: ApiGatewayApi
         ApipostEvent:
           Type: Api
           Properties:
