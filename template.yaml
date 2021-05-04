@@ -21,6 +21,14 @@ Resources:
             Method: get
             RestApiId:
               Ref: ApiGatewayApi
+        ApioptionEvent:
+          Type: Api
+          Properties:
+            Path: /code
+            #Method: get
+            Method: OPTIONS
+            RestApiId:
+              Ref: ApiGatewayApi
         ApipostEvent:
           Type: Api
           Properties:
