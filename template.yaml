@@ -36,12 +36,12 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      Events:
-        ApiEvent:
-          Type: Api 
-          Properties:
-            Path: /code/index.js
-            Method: get 
+      #Events:
+       # ApiEvent:
+        #  Type: Api 
+         # Properties:
+          #  Path: /code/index.js
+           # Method: get 
   ClearAllViewNotifications:
     Type: AWS::Serverless::Function
     Properties:
