@@ -19,6 +19,7 @@ Resources:
           Properties:
             Path: /code
             Method: get
+            Method: post
             RestApiId:
               Ref: ApiGatewayApi
       Runtime: nodejs12.x
