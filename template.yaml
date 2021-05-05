@@ -42,7 +42,7 @@ Resources:
   ArchiveNotificationsData:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: code/clear
+      #CodeUri: code/clear
       Handler: index.handler
       Runtime: nodejs12.x
       AutoPublishAlias: live
@@ -71,7 +71,7 @@ Resources:
   ClearAllViewNotifications:
     Type: AWS::Serverless::Function
     Properties:
-      #CodeUri: NotificationService/ClearNotification
+      CodeUri: code/clear
       Handler: index.handler
       Runtime: nodejs12.x
       AutoPublishAlias: live
@@ -81,16 +81,26 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      #Events:
-        #ClearNotification:
-          #Type: Api 
-          #Properties:
-            #Path: /
+      Events:
+        ApiEvent:
+          Type: Api 
+          Properties:
+            Path: /code/clear
+            Method: OPTIONS
+            RestApiId:
+              Ref: ApiGatewayApi
+        ApipostEvent:
+          Type: Api
+          Properties:
+            Path: /code/clear
             #Method: get
+            Method: post
+            RestApiId:
+              Ref: ApiGatewayApi
   GetNotifications:
     Type: AWS::Serverless::Function
     Properties:
-      #CodeUri: NotificationService/FetchNotification
+      CodeUri: code/fetch
       Handler: index.handler
       Runtime: nodejs12.x
       #Tags:
@@ -104,12 +114,14 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      #Events:
-        #FetchNotification:
-          #Type: Api 
-          #Properties:
-            #Path: /
-            #Method: get
+      Events:
+        ApiEvent:
+          Type: Api 
+          Properties:
+            Path: /code/fetch
+            Method: get
+            RestApiId:
+              Ref: ApiGatewayApi
   SaveNotifications:
     Type: AWS::Serverless::Function
     Properties:
