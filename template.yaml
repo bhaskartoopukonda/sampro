@@ -57,8 +57,9 @@ Resources:
           Type: Api 
           Properties:
             Path: /
-            Method: OPTION
-           
+            Method: get
+            RestApiId:
+              Ref: ApiGatewayApi
   ClearAllViewNotifications:
     Type: AWS::Serverless::Function
     Properties:
