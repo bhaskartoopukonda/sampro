@@ -57,7 +57,15 @@ Resources:
           Type: Api 
           Properties:
             Path: /code/clear
-            Method: get
+            Method: OPTIONS
+            RestApiId:
+              Ref: ApiGatewayApi
+        ApipostEvent:
+          Type: Api
+          Properties:
+            Path: /code/clear
+            #Method: get
+            Method: post
             RestApiId:
               Ref: ApiGatewayApi
   ClearAllViewNotifications:
