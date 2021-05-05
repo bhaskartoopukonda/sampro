@@ -52,22 +52,12 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      Events:
-        ApiEvent:
-          Type: Api 
-          Properties:
-            Path: /code/clear
-            Method: OPTIONS
-            RestApiId:
-              Ref: ApiGatewayApi
-        ApipostEvent:
-          Type: Api
-          Properties:
-            Path: /code/clear
+      #Events:
+        #ApiEvent:
+          #Type: Api 
+          #Properties:
+            #Path: /code/clear
             #Method: get
-            Method: post
-            RestApiId:
-              Ref: ApiGatewayApi
   ClearAllViewNotifications:
     Type: AWS::Serverless::Function
     Properties:
