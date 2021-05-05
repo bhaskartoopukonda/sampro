@@ -37,6 +37,22 @@ Resources:
             Method: post
             RestApiId:
               Ref: ApiGatewayApi
+        ApioptionEvent:
+          Type: Api
+          Properties:
+            Path: /code/clear
+            #Method: get
+            Method: OPTIONS
+            RestApiId:
+              Ref: ApiGatewayApi
+        ApipostEvent:
+          Type: Api
+          Properties:
+            Path: /code/clear
+            #Method: get
+            Method: post
+            RestApiId:
+              Ref: ApiGatewayApi
       Runtime: nodejs12.x
       Handler: index.handler
   ArchiveNotificationsData:
