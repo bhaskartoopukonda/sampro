@@ -37,28 +37,12 @@ Resources:
             Method: post
             RestApiId:
               Ref: ApiGatewayApi
-        ApioptionEvent:
-          Type: Api
-          Properties:
-            Path: /code/clear
-            #Method: get
-            Method: OPTIONS
-            RestApiId:
-              Ref: ApiGatewayApi
-        ApipostEvent:
-          Type: Api
-          Properties:
-            Path: /code/clear
-            #Method: get
-            Method: post
-            RestApiId:
-              Ref: ApiGatewayApi
       Runtime: nodejs12.x
       Handler: index.handler
   ArchiveNotificationsData:
     Type: AWS::Serverless::Function
     Properties:
-      #CodeUri: NotificationService/ArchiveNotification
+      CodeUri: code/clear
       Handler: index.handler
       Runtime: nodejs12.x
       AutoPublishAlias: live
@@ -68,12 +52,13 @@ Resources:
           - Effect: "Allow"
             Action: '*'
             Resource: '*'
-      #Events:
-       # ApiEvent:
-        #  Type: Api 
-         # Properties:
-          #  Path: /code/index.js
-           # Method: get 
+      Events:
+        ApiEvent:
+          Type: Api 
+          Properties:
+            Path: /
+            Method: OPTION
+           
   ClearAllViewNotifications:
     Type: AWS::Serverless::Function
     Properties:
