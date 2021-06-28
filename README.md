@@ -1,1 +1,1 @@
-![Build status](badge URL copied from AWS console)
+![Build status](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoibjVYcjR0c3ZEajNZWUM5UUJFZldybDFyK0dwRmZXbk5JQUZlR3MvT3dBcDluSFlRQVlKODBLeDU0RENJejZXdU83OUFvdHBRejVDa0ZtTkdreG05WnQ0PSIsIml2UGFyYW1ldGVyU3BlYyI6IndDeERPb2ZXUEpBalQwWm0iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
