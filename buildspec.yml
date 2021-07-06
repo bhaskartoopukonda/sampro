@@ -54,6 +54,7 @@ phases:
       #- echo 'Artifact name :::::'  $artifactname
       #- echo Copy artifact file to S3  
       - aws s3 cp $artifactname s3://$s3ArtifactBucketName
+      - buildExitCode=$?
     finally:
                   - |
                     if [ "$buildExitCode" -ne 0 ]; then
