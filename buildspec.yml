@@ -54,6 +54,17 @@ phases:
       #- echo 'Artifact name :::::'  $artifactname
       #- echo Copy artifact file to S3  
       - aws s3 cp $artifactname s3://$s3ArtifactBucketName
+    finally:
+                  - |
+                    if [ "$buildExitCode" -ne 0 ]; then
+                      badge_status=failing
+                      badge_colour=red
+                    else
+                      badge_status=passing
+                      badge_colour=green
+                    fi
+                  - curl -s "https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoibjVYcjR0c3ZEajNZWUM5UUJFZldybDFyK0dwRmZXbk5JQUZlR3MvT3dBcDluSFlRQVlKODBLeDU0RENJejZXdU83OUFvdHBRejVDa0ZtTkdreG05WnQ0PSIsIml2UGFyYW1ldGVyU3BlYyI6IndDeERPb2ZXUEpBalQwWm0iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=${GithubBranch}" > ${GithubBranch}-build.svg
+                  - aws s3 cp ${GithubBranch}-build.svg s3://${s3-bucket}/badges/${GithubBranch}-build.svg --acl public-read --cache-control no-cache  
   
   post_build:
     commands:
