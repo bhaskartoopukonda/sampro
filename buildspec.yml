@@ -63,8 +63,8 @@ phases:
                       badge_status=passing
                       badge_colour=green
                     fi
-                  #- curl -s "https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoibjVYcjR0c3ZEajNZWUM5UUJFZldybDFyK0dwRmZXbk5JQUZlR3MvT3dBcDluSFlRQVlKODBLeDU0RENJejZXdU83OUFvdHBRejVDa0ZtTkdreG05WnQ0PSIsIml2UGFyYW1ldGVyU3BlYyI6IndDeERPb2ZXUEpBalQwWm0iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=${GithubBranch}" > ${GithubBranch}-build.svg
-                   - curl -s "https://img.shields.io/badge/Build-$badge_status-$badge_colour.svg" > ${GithubBranch}-build.svg
+                  - curl -s "https://img.shields.io/badge/Build-$badge_status-$badge_colour.svg" > ${GithubBranch}-build.svg
+                   
                   #- aws s3 cp ${GithubBranch}-build.svg s3://${s3-bucket}/badges/${GithubBranch}-build.svg --acl public-read --cache-control no-cache  
   
   post_build:
