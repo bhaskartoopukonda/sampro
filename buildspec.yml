@@ -67,7 +67,7 @@ phases:
                   - curl -s "https://img.shields.io/badge/Build-$badge_status-$badge_colour.svg" > ${GithubBranch}-build.svg
                   - echo ${GithubBranch}-build.svg
                   - echo 'ls'
-                  - aws s3 cp ${GithubBranch}-build.svg s3://${s3-bucket}/badges/${GithubBranch}-build.svg --acl public-read --cache-control no-cache
+                  - aws s3 cp "${GithubBranch}-build.svg" s3://${s3-bucket}/badges/${GithubBranch}-build.svg --acl public-read --cache-control no-cache
                   #- aws s3 cp ${GithubBranch}-build.svg s3://${s3-bucket}/badges/${GithubBranch}-build.svg --acl public-read --cache-control no-cache  
   
   post_build:
