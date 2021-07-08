@@ -1,4 +1,4 @@
 
-![Generic badge](https://badgetestbucket.s3.amazonaws.com/badges/master-build.svg)
+![Generic badge](https://img.shields.io/badge/DUMMY-BADGE-red.svg)
 
 # dynamic-github-ci-cd-badges
