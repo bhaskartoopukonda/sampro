@@ -2,8 +2,10 @@ version: 0.2
 phases:
   install:
     runtime-versions:
+       on-failure: ABORT
        nodejs: 10
   pre_build:
+    on-failure: ABORT
     commands:
       - echo Pre-Build Installations started on `date`
       - pip install --upgrade pip
@@ -11,6 +13,7 @@ phases:
       - pip install awscli aws-sam-cli
       - echo Pre-Build Installations Finished on `date`
   build:
+    on-failure: ABORT
     commands:
       - echo Build started on `date`  
    
@@ -74,6 +77,7 @@ phases:
                   - aws s3 cp ${GithubBranch}-build.svg s3://${BUILD_OUTPUT_BUCKET}/badges/${GithubBranch}-build.svg --acl public-read --cache-control no-cache 
   
   post_build:
+    on-failure: ABORT
     commands:
       
       - echo "CloudFormation deploying...$deplenv" 
