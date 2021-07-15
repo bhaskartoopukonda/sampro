@@ -13,7 +13,7 @@ phases:
       - pip install awscli aws-sam-cli
       - echo Pre-Build Installations Finished on `date`
   build:
-    on-failure: CONTINUE
+    on-failure: ABORT
     commands:
       - echo Build started on `date`  
    
