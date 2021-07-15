@@ -1,8 +1,8 @@
 version: 0.2
 phases:
   install:
-    runtime-versions:
-       on-failure: ABORT
+    on-failure: ABORT
+    runtime-versions:       
        nodejs: 10
   pre_build:
     on-failure: ABORT
